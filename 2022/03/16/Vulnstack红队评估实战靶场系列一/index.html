@@ -541,7 +541,9 @@ set global general_log_file&#x3D;&#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#3
 <p>提权成功</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120020075.png"></p>
 <h3 id="3-4-系统信息收集"><a href="#3-4-系统信息收集" class="headerlink" title="3.4 系统信息收集"></a>3.4 系统信息收集</h3><p>查看网卡</p>
-<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120328097.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">shell ipconfig &#x2F;all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316125752478.png"></p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120358179.png"></p>
 <p>发现内网ip地址192.168.52.143和域god.org，查看域信息</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net group /domain  <span class="token comment">#查看域内所有用户列表</span>
