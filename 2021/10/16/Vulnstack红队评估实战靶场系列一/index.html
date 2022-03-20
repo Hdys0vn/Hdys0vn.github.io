@@ -472,12 +472,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ATT-amp-CK红队评估实战靶场（一）"><a href="#ATT-amp-CK红队评估实战靶场（一）" class="headerlink" title="ATT&amp;CK红队评估实战靶场（一）"></a>ATT&amp;CK红队评估实战靶场（一）</h1><h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>一直想要学习内网知识，看了很多文章，感觉还是眼高手低，整个靶场打下来还是不太顺利，自己很多知识点也是有点模糊，不说了菜鸡是好菜啊！！！</p>
+                <h1 id="ATT-amp-CK红队评估实战靶场（一）"><a href="#ATT-amp-CK红队评估实战靶场（一）" class="headerlink" title="ATT&amp;CK红队评估实战靶场（一）"></a>ATT&amp;CK红队评估实战靶场（一）</h1><h2 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h2><p>一直想要学习内网知识，看了很多文章，感觉还是眼高手低，整个靶场打下来还是不太顺利，自己很多知识点也是有点模糊，不说了菜鸡是好菜啊！！！</p>
 <p>本靶机环境是红日团队开源的一个红队实战测试环境，靶机下载地址如下：</p>
 <pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;vulnstack.qiyuanxuetang.net&#x2F;vuln&#x2F;detail&#x2F;2&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>通过模拟真实环境搭建的漏洞靶场，完全模拟ATK&amp;CK攻击链路进行搭建，形成完整个闭环。虚拟机默认密码为hongrisec@2019。</p>
-<h3 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h3><p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316081903337.png"></p>
+<h2 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h2><p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316081903337.png"></p>
 <h2 id="0x03-漏洞发现及利用"><a href="#0x03-漏洞发现及利用" class="headerlink" title="0x03 漏洞发现及利用"></a>0x03 漏洞发现及利用</h2><h3 id="3-1-信息收集"><a href="#3-1-信息收集" class="headerlink" title="3.1. 信息收集"></a>3.1. 信息收集</h3><h4 id="3-1-1-主机探测"><a href="#3-1-1-主机探测" class="headerlink" title="3.1.1 主机探测"></a>3.1.1 主机探测</h4><pre class="line-numbers language-none"><code class="language-none">netdiscover -i eth0 -r 192.168.1.0&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316083407043.png"></p>
@@ -629,9 +629,8 @@ run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220320095044892.png"></p>
 <p>至此成功获取到域控</p>
 <p>对于域成员192.168.52.141 我们同样可以使用这种攻击方式，这里就不在演示</p>
-<h3 id="0x05-说明："><a href="#0x05-说明：" class="headerlink" title="0x05 说明："></a>0x05 说明：</h3><p>经过这一次充分认识到自己的不足，还需要多加学习，有些地方自己还是没有完全弄明白，也参考了网络上的一些师傅们的教程，感谢分享。</p>
+<h2 id="0x05-说明："><a href="#0x05-说明：" class="headerlink" title="0x05 说明："></a>0x05 说明：</h2><p>经过这一次充分认识到自己的不足，还需要多加学习，有些地方自己还是没有完全弄明白，也参考了网络上的一些师傅们的教程，感谢分享。</p>
 <p>​    需要说明的是，获取域控的方式有很多，这里我们是直接利用了主机本身存在的安全漏洞。对于攻击成功以后的痕迹清理等等，都没有涉及到，不足的地方再查漏补缺，后续的系列文章中，我们再不断的学习不同的利用方式。</p>
-<p>到此最简单的获取域控线路结束</p>
 
                 
             </div>
