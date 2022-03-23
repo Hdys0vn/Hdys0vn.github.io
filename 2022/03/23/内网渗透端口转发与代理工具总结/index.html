@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="内网渗透端口转发与代理工具总结, Hdys0vn&#39;s Blog">
-    <meta name="description" content="">
+    <meta name="description" content="0x00 前言构建内网隐蔽通道，从而突破各种安全策略限制，实现对目标服务器的完美控制。当我们从外网成功获得攻击点的时候，通过反弹shell、端口转发、内网穿透等技巧，来进一步入侵内网服务器。当我们取得内网目标服务器的控制权限，通过隧道技术绕">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -467,7 +467,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>构建内网隐蔽通道，从而突破各种安全策略限制，实现对目标服务器的完美控制。<br>当我们从外网成功获得攻击点的时候，通过反弹shell、端口转发、内网穿透等技巧，来进一步入侵内网服务器。当我们取得内网目标服务器的控制权限，通过隧道技术绕过网络限制，实现隐蔽C2服务器的通信。</p>
+<p>网络拓扑：</p>
+<p><img src="/2022/03/23/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/image-20220323154340918.png" alt="image-20220323154340918"></p>
+<p>网络配置IP如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">攻击机：
+win10：192.168.1.
+kali：192.168.1.5
+
+靶场：
+VM1：对外边界服务器，win7
+192.168.52.143
+192.168.1.9
+
+VM2：域成员，2003
+192.168.52.141
+
+VM3：域控，2008
+192.168.52.138<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
                 
             </div>
             <hr/>

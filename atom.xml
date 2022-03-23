@@ -6,7 +6,7 @@
   <link href="https://hdys0vn.github.io/atom.xml" rel="self"/>
   
   <link href="https://hdys0vn.github.io/"/>
-  <updated>2022-03-23T10:14:39.067Z</updated>
+  <updated>2022-03-23T10:18:45.765Z</updated>
   <id>https://hdys0vn.github.io/</id>
   
   <author>
@@ -21,8 +21,15 @@
     <link href="https://hdys0vn.github.io/2022/03/23/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/"/>
     <id>https://hdys0vn.github.io/2022/03/23/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/</id>
     <published>2022-03-23T10:14:39.000Z</published>
-    <updated>2022-03-23T10:14:39.067Z</updated>
+    <updated>2022-03-23T10:18:45.765Z</updated>
     
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>构建内网隐蔽通道，从而突破各种安全策略限制，实现对目标服务器的完美控制。<br>当我们从外网成功获得攻击点的时候，通过反弹shell、端口转发、内网穿透等技巧，来进一步入侵内网服务器。当我们取得内网目标服务器的控制权限，通过隧道技术绕过网络限制，实现隐蔽C2服务器的通信。</p><p>网络拓扑：</p><p><img src="/2022/03/23/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/image-20220323154340918.png" alt="image-20220323154340918"></p><p>网络配置IP如下：</p><pre class="line-numbers language-none"><code class="language-none">攻击机：win10：192.168.1.kali：192.168.1.5靶场：VM1：对外边界服务器，win7192.168.52.143192.168.1.9VM2：域成员，2003192.168.52.141VM3：域控，2008192.168.52.138<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;构建内网隐蔽通道，从而突破各种安全策略限制，实现对目标服务器的完美控制。&lt;br&gt;当我们从外网成功获得</summary>
+      
     
     
     
