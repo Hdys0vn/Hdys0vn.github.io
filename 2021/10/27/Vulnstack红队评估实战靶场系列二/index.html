@@ -639,8 +639,18 @@ shell sc \\10.10.10.10 start unablefirewall    <span aria-hidden="true" class="l
 <p>这里我用到cs的smb beacon进行流量中转，首先建立监听一个smb beacon 再使用smb beacon进行psexec</p>
 <p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326110804284.png"></p>
 <p>即可上线DC</p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326143023388.png"></p>
 <h3 id="0x5-权限维持"><a href="#0x5-权限维持" class="headerlink" title="0x5 权限维持"></a>0x5 权限维持</h3><p>这里使用到金票进行权限维持</p>
 <p>首先<code>hashdump</code>出krbtgt的hash值</p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326143104618.png"></p>
+<p>查看一下SID</p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326143220642.png"></p>
+<p>在web主机上生成金票</p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326154528998.png"></p>
+<p>可以看到这里dir域控c盘成功</p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326154506656.png"></p>
+<p><img src="/2021/10/27/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%BA%8C/image-20220326154601412.png"></p>
+<h3 id="0x6-说明："><a href="#0x6-说明：" class="headerlink" title="0x6 说明："></a>0x6 说明：</h3><p>到这里，红日靶场二已经算是打完了，其中很多知识点还不算太清楚，对于权限维持这一部分具体的原理知识手续在慢慢学习梳理。</p>
 
                 
             </div>
